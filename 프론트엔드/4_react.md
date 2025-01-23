@@ -100,9 +100,9 @@ useContext 사용 시 주의할 점
 -   DOM 요소에 접근, 이전 상태를 저장하는 등의 용도
 -   useRef로 생성된 ref 객체는 컴포넌트가 언마운트될 때까지 유지. 메모리 누수를 일으킬 수 있으므로 필요하지 않은 경우 정리
 
-### useEffect vs useLayoutEffect의 차이
+### useEffect vs useLayoutEffect
 
--   useEffect는 DOM이 그려진 후 호출, 비동기호출
+-   useEffect는 DOM이 그려진 후 호출, 추후 의존성 배열의 상태가 바뀌면 화면 리랜더링 되고 다시 실행
 
 -   useLayoutEffect는 DOM이 그려지기 전 호출
 
