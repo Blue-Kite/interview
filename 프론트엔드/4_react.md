@@ -16,6 +16,12 @@ JS 코드 내부에 HTML를 작성해 DOM에 위치 가능
 
 컴포넌트 : 요소를 생성하는 일종의 공장
 
+### 상태 불변성
+
+1. 상태 변경을 예측할 수 있음 -> 디버깅을 용이하게 하며, 코드의 안정성을 높임
+
+2. 리액트는 props/state 변경 감지에 얕은 복사를 사용하는데 불변성을 유지하면 불필요한 렌더링을 방지할 수 있음
+
 ### React Lifecycle 와 SPA
 
 -   SPA : 하나의 HTML 페이지에서 브라우저가 동적으로 콘텐츠를 변경, rest api를 사용해 필요한 데이터를 비동기적으로 변경
@@ -28,12 +34,68 @@ JS 코드 내부에 HTML를 작성해 DOM에 위치 가능
 
 생성 : 컴포넌트가 메모리에 생성, 초기 상태나 props 설정(constructor, useState)
 
-마운트: 랜더링(화면에 그려짐), render 함수는 순수함수로 JSX가 HTML로 변환
+마운트: 컴포넌트가 DOM에 처음 삽입될 때, 랜더링 발생(화면에 그려짐), render 함수는 순수함수로 JSX가 HTML로 변환
 랜더링 이후 첫 랜더링에만 실행되는 과정 실행(componentDidmount, useEffect)
 
 업데이트: state/props 변경, 부모 컴포넌트 리랜더링 시 다시 화면에 그려짐
 
 언마운트: 컴포넌트가 dom에서 제거, 불필요한 리소스 정리
+
+### 클래스 컴포넌트의 라이프 사이클 메서드
+
+React 컴포넌트가 생명주기에 따라 단계가 있는데 각 단계마다 특정 메서드 실행 가능
+
+'constructor': 컴포넌트 생성후 가장 먼저 실행, state 초기화
+
+'render': 컴포넌트 UI 정의
+
+'componentDidMount': 컴포넌트가 화면에 나타난 후 실행, api 호출이나 구독 설정
+
+'shouldComponentUpdate': 컴포넌트 리렌더링할지 결정, 성능 최적화에 사용
+
+'componentDidUpdate': 컴포넌트가 업데이트된 후 실행, 업데이트 로직 처리
+
+'componentWillUnmount': 컴포넌트가 사라지기 전에 실행, 구독 해제, 타이머 제거, 이벤트 리스너 제거
+
+```
+class ExampleComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: null };
+  }
+
+  componentDidMount() {
+    // API 데이터 가져오기
+    fetch('api/data')
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+  }
+
+  componentDidUpdate(prevProps) {
+    // props 변경에 따른 부수 효과 처리
+    if (this.props.id !== prevProps.id) {
+      this.fetchData(this.props.id);
+    }
+  }
+
+  componentWillUnmount() {
+    // 정리 작업
+    this.subscription?.unsubscribe();
+  }
+
+  render() {
+    const { data } = this.state;
+    return data ? <div>{data}</div> : <Loading />;
+  }
+}
+```
+
+### 클래스 컴포넌트 vs 함수형 컴포너트
+
+-   클래스 컴포넌트 : React의 Component 클래스를 상속받아서 작성, LifeCycle 메서드로 컴포넌트 생명주기 관리
+    React 컴포넌트의 속성과 상태에 접근하기 위해 this 키워드 사용
+
+-   함수형 컴포너트 : hook을 통해 LifeCycle 라이프사이클 관리와 상태관리, this 필요 X
 
 ### react 사용 이유
 
@@ -47,7 +109,7 @@ JS 코드 내부에 HTML를 작성해 DOM에 위치 가능
 
 ### 가상돔
 
-리액트로 생성된 실제 DOM의 메모리상의 경량 가상 표현, HTML 웹 페이지를 트리 형태로 나타냄
+리액트로 생성된 실제 DOM의 메모리상의 복사본, HTML 웹 페이지를 트리 형태로 나타냄
 
 목적: UI가 리랜더링 될때 DOM 작업을 최소화
 
@@ -59,12 +121,6 @@ JS 코드 내부에 HTML를 작성해 DOM에 위치 가능
 
 4. 랜더링 라이브러리를 사용해 변경 사항을 실제 DOM에 업데이트
 
-### 클래스 컴포넌트 vs 함수형 컴포너트
-
--   클래스 컴포넌트 : LifeCycle API와 state 기능
-
--   함수형 컴포너트 : hook을 통해 LifeCycle API와 state 기능 사용 가능
-
 ### props vs state
 
 둘 다 변경시 상태변경시 랜더링 발생
@@ -74,6 +130,8 @@ props: 값이나 객체로 컴포넌트에 전달되는 인수, 부모가 자식
 state: 컴포넌트 자체에서 관리하는 객체, 비공개, 업데이트를 그룹화해 일괄 처리함, 직접처리 불가능하고 기존 객체 복사해서 새로운 객체 생성
 
 ### 컴포넌트 리랜더링 시점
+
+state/ props 변경, 부모 컴포넌트 리랜더링
 
 ### Hooks
 
@@ -104,12 +162,12 @@ React Hooks는 리액트 생명주기와 state와 관련된 JS 함수
 1-2. useReducer
 
 ```
-const [state, setState] = useReducer(reducer, 0, init)
+const [state, setState] = useReducer(reducer, 초기값, init)
 
 const reducer = (state, action) => {
-    switch(action.type){}
+    switch(action.type){ // }
 }
-const init = () => {}
+const init = () => { //초기화 함수 }
 
 ```
 
@@ -152,7 +210,7 @@ useContext 사용 시 주의할 점
 
 6. useRef
 
--   DOM 요소에 접근, 이전 상태를 저장하는 등의 용도
+-   DOM 요소에 접근 / 상태를 저장하는 등의 용도
 -   반환된 ref 객체는 컴포넌트의 전체 생명주기 동안 유지
 -   ref 객체의 .current 속성을 변경해도 리렌더링이 트리거되지 않음
 -   useRef로 생성된 ref 객체는 컴포넌트가 언마운트될 때까지 유지. 메모리 누수를 일으킬 수 있으므로 필요하지 않은 경우 정리
@@ -171,6 +229,14 @@ useContext 사용 시 주의할 점
 
 더 빠르고 더 적은 메모리, key 속성 지원
 
-# Key props를 사용하는 이유
+### Key props를 사용하는 이유
 
 목록에서 어떤 요소가 추가, 삭제, 변경되었는지 식별 가능하게 함
+
+### lazy loading, code splitting
+
+lazy loading : 초기 로딩시 리소스(이미지, 폰트)를 전부 가져오지 않고 리소스를 동적으로 로딩
+
+code splitting : 웹의 코드를 분할하여 필요한 시점에 로딩하는 것, React.lazy와 Suspense를 사용
+
+### 라우트
