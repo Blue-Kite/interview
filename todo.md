@@ -3,7 +3,7 @@
 -   네이버는 반응형 디자인인가 적응형 디자인?(user agent)
 -   url, dns 서버
 -   virtual dom
--   비동기통신, promise
+-   메모제이션
 
 ### 알아볼 것
 
