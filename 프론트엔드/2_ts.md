@@ -18,6 +18,8 @@ function getProperty<T, O extends keyof T>(obj: T, key: O){}
 
 ```
 
+#### 제네릭 유틸리티 함수
+
 ### type과 interface의 차이
 
 -   type : 원시값/객체/유니온타입/튜플 가능, &로 확장, 재선언하며 확장 불가능, computed value 가능

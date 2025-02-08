@@ -1,3 +1,17 @@
+### css 우선순위
+
+### Flex
+
+### Grid
+
+### Float
+
+### Display 속성
+
+### 시맨틱 마크업
+
+### CSS vs Styled-components
+
 ### padding vs margin
 
 margin: 바깥쪽 여백을 vs padding: 안쪽 여백
@@ -13,6 +27,10 @@ margin: 바깥쪽 여백을 vs padding: 안쪽 여백
 1. sticky + top, left, right, bottom 속성 중 하나 필요
 
 2. 부모 요소 안에서 적용됨 => 부모 요소에 반드시 height 있어야함
+
+### z-index와 스택 컨텍스트(stacking context)
+
+### inline vs inline-block
 
 ### 반응형 디자인 vs 적응형 디자인
 
