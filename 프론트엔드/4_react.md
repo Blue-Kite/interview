@@ -277,7 +277,8 @@ code splitting : 웹의 코드를 분할하여 필요한 시점에 로딩하는 
 
 - MVC 패턴 : 모델(데이터), 뷰(UI), 컨트롤러(데이터 관리), 양방향 데이터 처리(View에서 Model 업데이트 가능) 
 
-- Flux 패턴 : 단방향 데이터 흐름 => 상태 관리 용이, 에러 처리 수월 
+- Flux 패턴 : 단방향 데이터 흐름 => 상태 관리 용이, 에러 처리 수월
+  
 Action : 이벤트, 사용자 상호작용, 서버 응답 등
 
 Dispatcher: 액션을 받아서 등록된 모든 Store에 전달 
@@ -295,3 +296,20 @@ View: 스토어의 상태를 받아 화면에 표시, 리액트 컴포넌트
 ### 제어 컴포넌트와 비제어 컴포넌트의 차이
 
 리액트에 의해 값이 제어되면 제어 컴포넌트, 아니면 비제어 컴포넌트 
+
+```
+//제어 컴포넌트 
+const [text,setText] = useState('')
+<input value={text} onChange={(e)=>{setText(e.target.value)} />
+
+//비제어 컴포넌트
+const inputRef = useRef();
+
+const handle = (e)=>{
+  e.preventDefault()
+  console.log(inputRef.current.value})
+}
+<form onSubmit={hanldeSubmit}>
+<input ref={inputRef}/>
+</form>
+```
