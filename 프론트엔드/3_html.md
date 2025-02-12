@@ -14,7 +14,9 @@ HTML 요소들이 가진 의미에 맞게 구조를 설계
 
 유지보수 편리/ SEO 최적화/ 웹 접근성에 유리 
 
+```
 <header> <footer> <main> <aside> <nav> <ul> <ol> <li> <article> <section> <h1> ~ <h6>
+```
 
 ### CSS vs Styled-components
 
