@@ -20,6 +20,14 @@ HTML 요소들이 가진 의미에 맞게 구조를 설계
 
 ### CSS vs Styled-components
 
+- CSS : [name].module.css 파일 적용 
+
+- CSS-in-JS
+
+1. Styled-components : 컴포넌트 기반으로 유지보수성 향상, 동적 스타일링 적용 수월 / JS 번들 크기 증가
+
+2. tailwind css 
+
 ### padding vs margin
 
 margin: 바깥쪽 여백을 vs padding: 안쪽 여백
