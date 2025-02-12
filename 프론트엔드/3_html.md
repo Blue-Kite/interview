@@ -86,18 +86,18 @@ float 속성이 적용된 요소 다음 요소들이 더 이상 float 속성 영
   a. width, height 설정 가능
   b. 부모 요소 100%
   c. 줄바꿈 o
-  대표적 요소: <div>, <p>, <h1>
+  대표적 요소: `<div>`, `<p>`, `<h1>`
 
 2. inline
   a. 콘텐츠 크기만큼만 공간 차지
   b. width, height 설정 불가
   c. 줄바꿈 x
-  대표적 요소: <span>, <a>
+  대표적 요소: `<span>`, `<a>`
   
 3. inline-block
   a. width, height 설정 가능
   b. 줄바꿈 x
-  대표적 요소: <button>, <input>
+  대표적 요소: `<button>`, `<input>`
 
 5. flex, grid는 위엠 참고
 
