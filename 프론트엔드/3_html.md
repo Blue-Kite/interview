@@ -1,12 +1,110 @@
 ### css 우선순위
 
+!important => 인라인 스타일링 => id 선택자 => 클래스/속성/가상 선택자 => 요소 선택자 => 전체 선택자
+
+동일한 우선순위면 나중에 선언한 스타일링이 적용됨, 자신은 부모의 우선순위를 상속 x
+
 ### Flex
+
+부모 요소인 container에 display:flex를 선언
+
+부모 요소 : flex-direaction(배치 방향), justify-content(주축 방향), align-items(교차축 방향 정렬), flex-wrap(줄바꿈)
+
+자식 요소 : flex-grow(남은 공간 분배), flex-shrink(축소 비율), flex-basis (기본 크기)
+
+```
+flex-direction: row;            
+flex-direction: row-reverse;    
+flex-direction: column;         
+flex-direction: column-reverse;
+```
+
+```
+justify-content: flex-start;    /* 시작점 정렬 */
+justify-content: flex-end;      /* 끝점 정렬 */
+justify-content: center;        /* 가운데 정렬 */
+justify-content: space-between; /* 양끝 정렬 */
+justify-content: space-around;  /* 균등 여백 */
+justify-content: space-evenly;  /* 균일 간격 */
+```
+
+```
+align-items: stretch;     /* 컨테이너를 채움 (기본값) */
+align-items: flex-start;  
+align-items: flex-end;    
+align-items: center;      
+align-items: baseline;
+```
+
+```
+flex-wrap: nowrap;       /* 한 줄에 배치 (기본값) */
+flex-wrap: wrap;         /* 여러 줄에 배치 */
+flex-wrap: wrap-reverse;
+```
+
+```
+flex-grow: 0; /* 기본값 */
+flex-grow: 1; /* 남은 공간을 1의 비율로 차지 */
+```
+
+```
+flex-shrink: 1; /* 기본값 */
+flex-shrink: 0; /* 축소하지 않음 */
+flex-shrink: 2; /* 2배로 축소 */
+```
+
+```
+flex-basis: auto; /* 기본값 */
+flex-basis: 0;    /* 0부터 시작 */
+flex-basis: 50%;  /* 50% 크기로 시작 */
+```
 
 ### Grid
 
 ### Float
 
+기본 레이아웃에서 벗어나 이동함 
+```
+.element {
+  float: left;    
+  float: right;   
+  float: none;    /* default */
+}
+```
+float 속성이 적용된 요소 다음 요소들이 더 이상 float 속성 영향을 안 받도록 해야함 
+```
+.next-element {
+  clear: both;    /* 양쪽 float 해제 */
+  clear: left;    
+  clear: right;  
+}
+```
+
 ### Display 속성
+
+1. block
+  a. width, height 설정 가능
+  b. 부모 요소 100%
+  c. 줄바꿈 o
+  대표적 요소: <div>, <p>, <h1>
+
+2. inline
+  a. 콘텐츠 크기만큼만 공간 차지
+  b. width, height 설정 불가
+  c. 줄바꿈 x
+  대표적 요소: <span>, <a>
+  
+3. inline-block
+  a. width, height 설정 가능
+  b. 줄바꿈 x
+  대표적 요소: <button>, <input>
+
+5. flex, grid는 위엠 참고
+
+6. none
+   요소를 화면에서 완전히 제거
+
+#### inline vs inline-block
 
 ### 시맨틱 마크업
 
@@ -45,8 +143,6 @@ margin: 바깥쪽 여백을 vs padding: 안쪽 여백
 2. 부모 요소 안에서 적용됨 => 부모 요소에 반드시 height 있어야함
 
 ### z-index와 스택 컨텍스트(stacking context)
-
-### inline vs inline-block
 
 ### 반응형 디자인 vs 적응형 디자인
 
